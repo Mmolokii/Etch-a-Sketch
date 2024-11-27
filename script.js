@@ -9,16 +9,18 @@ function createGrid(size){
 
     //creating the squares
     const squareSize = 960 / size; 
-    for(let i = 0; i < size; i++){
+    for(let i = 0; i < size * size; i++){
         const square = document.createElement('div'); 
-        square.style.width = squareSize; 
-        square.style.height = squareSize; 
+        square.style.width = `${squareSize}px`; 
+        square.style.height = `${squareSize}px`; 
         square.style.border = '1px solid #ddd'
         square.addEventListener("mouseover", () => {
-
+            square.style.backgroundColor = 'black'; 
         }); 
         container.appendChild(square); 
     }
 }
+
+
 
 createGrid(16); 
