@@ -1,4 +1,6 @@
-const container = document.getElementById("container"); 
+// Select the container and reset button from the DOM
+const container = document.getElementById('container');
+const resetButton = document.getElementById('resetButton');
 
 function createGrid(size){
     container.innerHTML = ''; // clear the existing container
@@ -21,6 +23,13 @@ function createGrid(size){
     }
 }
 
-
+resetGrid.addEventListener("click", () => {
+    let size = parseInt(prompt("Enter a new size (1-100):"), 10); 
+    if(size > 0 && size <= 100){
+        createGrid(size); 
+    } else {
+        alert("Please enter a number between 1 and 100");
+    }
+}); 
 
 createGrid(16); 
