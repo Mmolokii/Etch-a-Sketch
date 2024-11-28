@@ -1,11 +1,16 @@
 // Select the container and reset button from the DOM
 const container = document.getElementById('container');
 const resetButton = document.getElementById('resetButton');
+const darkenButton = document.getElementById('darkenButton');
+const randomButton = document.getElementById('randomButton'); 
 
+// Variable to track the active mode (default is darken)
+let activeMode = "darken";
+// Function to create a grid
 function createGrid(size){
-    container.innerHTML = ''; // clear the existing container
-    container.style.display = 'flex'; 
-    container.style.flexWrap = 'wrap'; 
+    container.innerHTML = ''; // clear existing grid
+    container.style.display = 'flex'; // Flexbox Layout
+    container.style.flexWrap = 'wrap'; // Allow wrapping
     container.style.width = '960px'; 
     container.style.height = '960px'; 
 
@@ -19,17 +24,37 @@ function createGrid(size){
         square.addEventListener("mouseover", () => {
             square.style.backgroundColor = 'black'; 
         }); 
+
+        // Append the square to the container
         container.appendChild(square); 
     }
 }
 
-resetGrid.addEventListener("click", () => {
+// Initial grid creation
+createGrid(16);
+
+resetButton.addEventListener("click", () => {
+    // Prompt user for new grid size
     let size = parseInt(prompt("Enter a new size (1-100):"), 10); 
+
+    // Validate input
     if(size > 0 && size <= 100){
-        createGrid(size); 
+        createGrid(size); // Generate new grid
     } else {
-        alert("Please enter a number between 1 and 100");
+        alert("Please enter a number between 1 and 100"); // Error message
     }
 }); 
 
-createGrid(16); 
+// Event listener for the Random button
+randomButton.addEventListener("click", ()=> {
+    activeMode = 'random'; // Set mode to random
+    randomButton.classList.add('active'); // Highlight active button
+    darkenButton.classList.remove('active'); // Highlight active button
+}); 
+
+// Event listener for the Darken button
+darkenButton.addEventListener("click", ()=> {
+    activeMode = 'darken'; // Set mode to random
+    darkenButton.classList.add('active'); // Highlight active button
+    randomButton.classList.remove('active'); // Highlight active button
+}); 
